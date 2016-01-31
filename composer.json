@@ -7,7 +7,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "proengsoft/laravel-jsvalidation": "~1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -46,7 +47,8 @@
             "php artisan clear-compiled"
         ],
         "post-update-cmd": [
-            "php artisan optimize"
+            "php artisan optimize",
+            "php artisan vendor:publish --provider=\"Proengsoft\\JsValidation\\JsValidationServiceProvider\" --tag=public --force"
         ]
     },
     "config": {

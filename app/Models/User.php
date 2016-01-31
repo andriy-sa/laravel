@@ -31,4 +31,12 @@ class User extends Authenticatable
     public function hasRole($check){
         return in_array($check,$this->roles->lists('name')->toArray());
     }
+
+    public function advertisements(){
+        return $this->hasMany('App\Models\Advertisement','user_id');
+    }
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment','user_id');
+    }
 }

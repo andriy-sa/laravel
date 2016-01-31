@@ -13,9 +13,8 @@ class DefaultController extends Controller
 {	
     
 	public function index(){
-		dump(app());
-		return view('site.front');
 
+		return view('site.front');
 	}
 
 	public function users(){

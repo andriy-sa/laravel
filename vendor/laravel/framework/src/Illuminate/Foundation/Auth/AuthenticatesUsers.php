@@ -5,7 +5,6 @@ namespace Illuminate\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use Config;
 
 trait AuthenticatesUsers
 {
@@ -28,8 +27,11 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        if (view()->exists('auth.authenticate')) {
-            return view('auth.authenticate');
+        $view = property_exists($this, 'loginView')
+                    ? $this->loginView : 'auth.authenticate';
+
+        if (view()->exists($view)) {
+            return view($view);
         }
 
         return view('auth.login');
@@ -97,7 +99,7 @@ trait AuthenticatesUsers
         }
 
         if (method_exists($this, 'authenticated')) {
-            return $this->authenticated($request, Auth::user());
+            return $this->authenticated($request, Auth::guard($this->getGuard())->user());
         }
 
         return redirect()->intended($this->redirectPath());
@@ -106,12 +108,12 @@ trait AuthenticatesUsers
     /**
      * Get the failed login response instance.
      *
-     * @param \Illuminate\Http\Request  $response
+     * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     protected function sendFailedLoginResponse(Request $request)
     {
-        return redirect('/'.Config::get('app.locale').'/login')
+        return redirect()->back()
             ->withInput($request->only($this->loginUsername(), 'remember'))
             ->withErrors([
                 $this->loginUsername() => $this->getFailedLoginMessage(),
@@ -158,7 +160,7 @@ trait AuthenticatesUsers
      */
     public function logout()
     {
-        Auth::logout();
+        Auth::guard($this->getGuard())->logout();
 
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }

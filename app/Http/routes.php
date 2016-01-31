@@ -27,10 +27,24 @@
 Route::group(['middleware' => ['web']], function () {
 
     Route::group(['prefix' => '{locale?}','middleware' => ['locale']], function () {
-        Route::get('/', 'DefaultController@index')->name('home')->defaults('locale','uk')->where('locale','uk|ru');
         Route::auth();
+        Route::get('/', 'DefaultController@index')->name('home')->defaults('locale','uk')->where('locale','uk|ru');
+
+        Route::get('advertisements/create','AdvertisementController@create')->name('advert_create')->where('locale','uk|ru');
+        Route::post('advertisements/create','AdvertisementController@post_create')->name('post_advert_create')->where('locale','uk|ru');
+        Route::get('advertisements','AdvertisementController@index')->name('advert')->where('locale','uk|ru');
+        Route::get('advertisements/{category}','AdvertisementController@category')->name('cat_advert')->where('locale','uk|ru');
+        Route::get('advertisements/{category}/{url}','AdvertisementController@advertisement')->name('advertisement')->where('locale','uk|ru');
+
+        /* profile */
         Route::get('/home', 'HomeController@index')->name('profile');
+        Route::post('/home', 'HomeController@post_index')->name('profile_post');
     });
+
+    // Password Reset Routes...
+    $this->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+    $this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+    $this->post('password/reset', 'Auth\PasswordController@reset');
 
     Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () {
 

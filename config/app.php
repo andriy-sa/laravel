@@ -150,6 +150,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
+
         /*
          * Application Service Providers...
          */
@@ -160,6 +161,7 @@ return [
         App\Providers\SlugServiceProvider::class,
         App\Providers\SiteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Proengsoft\JsValidation\JsValidationServiceProvider::class,
 
     ],
 
@@ -208,7 +210,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
-
+        'Input'     => Illuminate\Support\Facades\Input::class,
+        'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
     ],
 
 ];

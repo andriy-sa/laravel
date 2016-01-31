@@ -16,7 +16,7 @@
                         <input type="submit" id="login" value="{{ trans('message.login') }}">
                         <label for="checkbox"><input type="checkbox" name="remember" id="checkbox"> <i>{{ trans('message.remember') }}</i></label>
                     </fieldset>
-                    <a class="btn btn-link" href="{{ url(Config::get('app.locale').'/password/reset') }}">{{ trans('message.pass_forgot') }}</a>
+                    <a class="btn btn-link" href="{{ url('/password/reset') }}">{{ trans('message.pass_forgot') }}</a>
                 </form>
             </div>
         </div>
