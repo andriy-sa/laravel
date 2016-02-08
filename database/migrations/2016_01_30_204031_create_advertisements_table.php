@@ -22,6 +22,7 @@ class CreateAdvertisementsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('read')->default(0);
             $table->string('status')->default('default');
+            $table->integer('sel_comment')->default(0);
             $table->boolean('published')->default(1);
             $table->string('url')->unique()->index();
             $table->timestamps();

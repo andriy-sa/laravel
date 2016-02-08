@@ -30,8 +30,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::auth();
         Route::get('/', 'DefaultController@index')->name('home')->defaults('locale','uk')->where('locale','uk|ru');
 
-        Route::get('advertisements/create','AdvertisementController@create')->name('advert_create')->where('locale','uk|ru');
-        Route::post('advertisements/create','AdvertisementController@post_create')->name('post_advert_create')->where('locale','uk|ru');
+        Route::get('advertisements/create',['middleware'=>'auth','uses'=>'AdvertisementController@create'])->name('advert_create')->where('locale','uk|ru');
+        Route::post('advertisements/create',['middleware'=>'auth','uses'=>'AdvertisementController@post_create'])->name('post_advert_create')->where('locale','uk|ru');
+
         Route::get('advertisements','AdvertisementController@index')->name('advert')->where('locale','uk|ru');
         Route::get('advertisements/{category}','AdvertisementController@category')->name('cat_advert')->where('locale','uk|ru');
         Route::get('advertisements/{category}/{url}','AdvertisementController@advertisement')->name('advertisement')->where('locale','uk|ru');
