@@ -11,7 +11,9 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     @yield('styles')
+    <link href="/css/slick.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/logo.png" type="image/png">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -27,9 +29,7 @@
         <div class="header_top">
             <div class="top_right">
                 <ul>
-                    <li><a href="#">{{ trans('message.help') }}</a></li>
-                    |
-                    <li><a href="#">{{ trans('message.contacts') }}</a></li>
+                    <li><a href="{{ route('help',['locale'=>$cur_local]) }}">{{ trans('message.help') }}</a></li>
                 </ul>
             </div>
             <div class="top_left">
@@ -66,8 +66,8 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="search">
-                        <form>
-                            <input type="text" value="" placeholder="{{ trans('message.search') }}">
+                        <form method="get" action="{{ route('search',['locale'=>$cur_local]) }}">
+                            <input type="text" name="q" value="" placeholder="{{ trans('message.search') }}">
                             <input type="submit" value="">
                         </form>
                     </div>
@@ -93,6 +93,8 @@
             <ul class="nav navbar-nav">
                 <li @if(Route::current()->getName() == 'home') class="active" @endif><a href="{{route('home',['locale'=>$cur_local])}}">{{ trans('message.home') }}</a></li>
                 <li @if(Route::current()->getName() == 'advert') class="active" @endif><a href="{{ route('advert',['locale'=>$cur_local]) }}">{{ trans('message.advertisement') }}</a></li>
+                <li @if(Route::current()->getName() == 'advert_create') class="active" @endif><a href="{{ route('advert_create',['locale'=>$cur_local]) }}">{{ trans('message.advert_create') }}</a></li>
+                <li @if(Route::current()->getName() == 'request') class="active" @endif><a href="{{ route('request',['locale'=>$cur_local]) }}">{{ trans('message.order_request') }}</a></li>
             </ul>
             <div class="btn-group lang-group navbar-right">
                 <button type="button" class="btn">{{ Config::get('app.locale') }}</button>
@@ -108,6 +110,7 @@
         </div><!-- /.navbar-collapse -->
     </nav>
 </div>
+@include('blocks.baner_a1')
 @include('blocks.log')
 <div id="main-content">
     @yield('content')
@@ -127,6 +130,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/slick.min.js"></script>
 <script src="/js/function.js"></script>
 <script src="/js/menu_jquery.js"></script>
 @yield('scripts')

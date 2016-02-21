@@ -1,22 +1,20 @@
 @extends('layouts.app')
 
-@section('title',$title.' | '.trans('message.action'))
+@section('title',trans('message.search').' | '.trans('message.action'))
 
 @section('content')
     <div class="container advertisements-page">
         <div class="page-title">
-            <h1>{{ $title }}</h1>
+            <h1>{{ trans('message.search') }} : {{ $q }}</h1>
         </div>
         <div class="col-sm-4">
-            @include('blocks.category_sidebar')
-            @include('blocks.popular_block')
+            @include('blocks.top_block')
             @include('blocks.baner_b1')
+            @include('blocks.latest_block')
+            @include('blocks.baner_b2')
         </div>
         <div class="col-sm-8">
             <div class="advertisements-items">
-                @foreach($top_advertisements as $item)
-                    @include('blocks.item')
-                @endforeach
                 @foreach($advertisements as $item)
                     @include('blocks.item')
                 @endforeach

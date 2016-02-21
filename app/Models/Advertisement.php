@@ -15,6 +15,36 @@ class Advertisement extends Model
     }
 
     public function comments(){
-        return $this->hasMany('App\Models\Comment','advertisement_id');
+        return $this->hasMany('App\Models\Comment','advertisement_id')->orderBy('created_at','desc');
+    }
+
+    public function get_last_advert(){
+        $result = $this->where('published',1)
+            ->whereNotIn('status',['blocked','top'])
+            ->orderBy('created_at','desc')
+            ->take(10)
+            ->get();
+
+        return $result;
+    }
+
+    public function get_top_advert(){
+        $result = $this->where('published',1)
+            ->where('status','top')
+            ->orderBy('created_at','desc')
+            ->take(10)
+            ->get();
+
+        return $result;
+    }
+
+    public function get_popular_advert(){
+        $result = $this->where('published',1)
+            ->whereNotIn('status',['blocked','top'])
+            ->orderBy('read','desc')
+            ->take(10)
+            ->get();
+
+        return $result;
     }
 }

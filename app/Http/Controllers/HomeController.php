@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Models\Advertisement;
 use Illuminate\Http\Request;
 use Auth;
 use Image;
@@ -33,8 +34,8 @@ class HomeController extends Controller
         }
         $validator = Validator::make(Input::all(),$rules);
 
-        if(!$validator->fails()){
-            redirect()->back()->with('success',trans('message.success_update_profile'));
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors()->all());
         }
         $user = Auth::user();
         $user->name = Input::get('name','');
@@ -53,6 +54,53 @@ class HomeController extends Controller
             $user->photo = $fileName;
         }
         $user->save();
-        return redirect()->back()->with('error',$validator->errors()->all());
+        return redirect()->back()->with('success',trans('message.success_update_profile'));
     }
+
+    public function my_advert($locale){
+        $user = Auth::user();
+        $advert = Advertisement::where('published',1)
+            ->where('user_id',$user->id)
+            ->orderBy('created_at','desc')
+            ->paginate(20);
+
+        return view('site.profile.my_advert')
+            ->with('advert',$advert);
+    }
+
+    public function my_answer($locale){
+        $user = Auth::user();
+
+        $advert = Advertisement::where('published',1)
+            ->whereHas('comments',function($q) use ($user){
+                $q->where('user_id',$user->id);
+            })
+            ->orderBy('created_at','desc')
+            ->paginate(20);
+
+        return view('site.profile.my_answer')
+            ->with('advert',$advert);
+    }
+
+    public function to_message(){
+        $user = Auth::user();
+
+        $messages = $user->message_to()->orderBy('created_at','desc')->paginate(20);
+
+        return view('site.profile.to_message')
+            ->with('messages',$messages);
+    }
+
+    public function from_message(){
+        $user = Auth::user();
+
+        $messages = $user->message_from()->orderBy('created_at','desc')->paginate(20);
+
+       // dd($messages);
+
+        return view('site.profile.from_message')
+            ->with('messages',$messages);
+    }
+
+
 }

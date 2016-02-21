@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title',trans('message.profile'))
+
 @section('content')
 <div class="container profile-section">
     <h1>{{ trans('message.update_profile') }}</h1>
