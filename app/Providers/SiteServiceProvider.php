@@ -13,7 +13,7 @@ class SiteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['site/*','auth/*'],'App\Http\Composers\FrontComposer');  
+        View::composer(['site/*','auth/*','admin/*'],'App\Http\Composers\FrontComposer');
 
     }
 

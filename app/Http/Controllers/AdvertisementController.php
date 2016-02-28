@@ -37,9 +37,11 @@ class AdvertisementController extends Controller
         $advertisements = Advertisement::where('published',1)
             ->where('status','!=','top')
             ->orderBy('created_at','desc')
+            ->has('category')
             ->paginate(15);
         $top_advertisements = Advertisement::where('published',1)
             ->where('status','=','top')
+            ->has('category')
             ->orderBy('created_at','desc')
             ->get();
 
@@ -63,6 +65,7 @@ class AdvertisementController extends Controller
                 $query->where('title','like','%'.$q.'%')
                       ->orWhere('description','like','%'.$q.'%');
             })
+            ->has('category')
             ->orderBy('created_at','desc')
             ->paginate(15);
 
@@ -94,11 +97,13 @@ class AdvertisementController extends Controller
             ->where('status','!=','top')
             ->where('category_id',$cur_category->id)
             ->orderBy('created_at','desc')
+            ->has('category')
             ->paginate(15);
         $top_advertisements = Advertisement::where('published',1)
             ->where('status','=','top')
             ->where('category_id',$cur_category->id)
             ->orderBy('created_at','desc')
+            ->has('category')
             ->get();
 
         $b1_baner = Baner::where('type','b1')->get();

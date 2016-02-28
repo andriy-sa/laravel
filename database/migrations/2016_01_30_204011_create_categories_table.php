@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('ru_title');
             $table->string('icon');
             $table->string('url')->unique()->index();
+            $table->softDeletes();
         });
     }
 

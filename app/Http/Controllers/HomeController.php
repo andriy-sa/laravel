@@ -61,6 +61,9 @@ class HomeController extends Controller
         $user = Auth::user();
         $advert = Advertisement::where('published',1)
             ->where('user_id',$user->id)
+            ->with(['category' => function($query){
+                $query->withTrashed();
+            }])
             ->orderBy('created_at','desc')
             ->paginate(20);
 
@@ -75,6 +78,7 @@ class HomeController extends Controller
             ->whereHas('comments',function($q) use ($user){
                 $q->where('user_id',$user->id);
             })
+            ->has('category')
             ->orderBy('created_at','desc')
             ->paginate(20);
 

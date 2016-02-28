@@ -22,6 +22,7 @@ class Advertisement extends Model
         $result = $this->where('published',1)
             ->whereNotIn('status',['blocked','top'])
             ->orderBy('created_at','desc')
+            ->has('category')
             ->take(10)
             ->get();
 
@@ -32,6 +33,7 @@ class Advertisement extends Model
         $result = $this->where('published',1)
             ->where('status','top')
             ->orderBy('created_at','desc')
+            ->has('category')
             ->take(10)
             ->get();
 
@@ -42,6 +44,7 @@ class Advertisement extends Model
         $result = $this->where('published',1)
             ->whereNotIn('status',['blocked','top'])
             ->orderBy('read','desc')
+            ->has('category')
             ->take(10)
             ->get();
 

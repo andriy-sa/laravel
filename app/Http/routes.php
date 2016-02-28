@@ -67,8 +67,36 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () {
 
-    	Route::get('users', 'DefaultController@users')->name('users');
         Route::get('/','AdminController@index')->name('admin_index');
+        Route::post('/','AdminController@update_rules')->name('admin_index_post');
+
+        Route::get('advertisements','AdminController@adverts')->name('admin_adverts');
+        Route::get('advertisements/update/{id}','AdminController@adverts_update')->name('admin_adverts_update');
+        Route::post('advertisements/update/{id}','AdminController@adverts_update_post')->name('admin_adverts_update_post');
+        Route::get('advertisements/delete/{id}','AdminController@adverts_delete')->name('admin_adverts_delete');
+
+        Route::get('baners','AdminController@baners')->name('admin_baners');
+        Route::get('baners/add','AdminController@baners_add')->name('admin_baners_add');
+        Route::post('baners/add','AdminController@baners_add_post')->name('admin_baners_add_post');
+        Route::get('baners/edit/{id}','AdminController@baner_update')->name('admin_baner_update');
+        Route::post('baners/edit/{id}','AdminController@baner_update_post')->name('admin_baner_update_post');
+        Route::get('baners/delete/{id}','AdminController@baner_delete')->name('admin_baner_delete');
+
+        Route::get('categories','AdminController@categories')->name('admin_categories');
+        Route::get('categories/trashed','AdminController@categories_trashed')->name('admin_categories_trashed');
+        Route::get('category/add','AdminController@category_add')->name('admin_category_add');
+        Route::post('category/add','AdminController@category_add_post')->name('admin_category_add_post');
+
+        Route::get('category/edit/{id}','AdminController@category_edit')->name('admin_category_edit');
+        Route::post('category/edit/{id}','AdminController@category_edit_post')->name('admin_category_edit_post');
+        Route::get('category/delete/{id}','AdminController@category_delete')->name('admin_category_delete');
+        Route::get('category/restore/{id}','AdminController@category_restore')->name('admin_category_restore');
+
+        Route::get('messages','AdminController@messages')->name('admin_messages');
+        Route::get('users','AdminController@users')->name('admin_users');
+
+        Route::post('users/change_ban','AdminController@change_ban');
+        Route::any('adverts_ajax','AdminController@adverts_ajax');
 	});
 
 });

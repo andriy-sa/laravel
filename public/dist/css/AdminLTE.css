@@ -26,6 +26,9 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+#admin-content {
+  padding: 20px;
+}
 /* Layout */
 .wrapper {
   min-height: 100%;

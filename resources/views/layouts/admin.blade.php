@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@yield('title')</title>
+    <title>Admin Panel</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -13,7 +13,7 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/dist/css/AdminLTE.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
@@ -30,7 +30,7 @@
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="/admin" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>S</b>A</span>
           <!-- logo for regular state and mobile devices -->
@@ -51,130 +51,43 @@
               <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
-                  <span class="label label-success">4</span>
+                  <span class="label label-success">{{ $last_orders->count() }}</span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="header">You have 4 messages</li>
+                  <li class="header">You have {{ $last_orders->count() }} messages</li>
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
+                      @foreach($last_orders as $item)
                       <li><!-- start message -->
                         <a href="#">
                           <div class="pull-left">
-                            <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                           </div>
                           <h4>
-                            Support Team
-                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                            {{ $item->name }}
+                            <small><i class="fa fa-clock-o"></i>{{ date('Y-m-d H:i',strtotime($item->created_at)) }}</small>
                           </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li><!-- end message -->
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            AdminLTE Design Team
-                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
+                          <p>phone: {{ $item->phone }}</p>
+                          <p>{{$item->type}} ({{ $item->aid }})</p>
                         </a>
                       </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            Developers
-                            <small><i class="fa fa-clock-o"></i> Today</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            Sales Department
-                            <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                          </div>
-                          <h4>
-                            Reviewers
-                            <small><i class="fa fa-clock-o"></i> 2 days</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li>
+                      @endforeach
                     </ul>
                   </li>
-                  <li class="footer"><a href="#">See All Messages</a></li>
+                  <li class="footer"><a href="{{ route('admin_messages') }}">See All Messages</a></li>
                 </ul>
               </li>
-              <!-- Notifications: style can be found in dropdown.less -->
-              <li class="dropdown notifications-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-bell-o"></i>
-                  <span class="label label-warning">10</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li class="header">You have 10 notifications</li>
-                  <li>
-                    <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the page and may cause design problems
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-users text-red"></i> 5 new members joined
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-user text-light-blue"></i> You changed your username
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="footer"><a href="#">View all</a></li>
-                </ul>
-              </li>
-              
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                  <img src="/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                   <span class="hidden-xs">Andriy Smolyar</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     <p>
                       Andriy Smolyar - Web Developer
                     </p>
@@ -182,10 +95,10 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Мій профіль</a>
+                      <a href="{{ route('profile',['locale'=>'uk']) }}" class="btn btn-default btn-flat">Мій профіль</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Вийти</a>
+                      <a href="/uk/logout" class="btn btn-default btn-flat">Вийти</a>
                     </div>
                   </li>
                 </ul>
@@ -205,148 +118,56 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+              <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
               <p>Andriy Smolyar</p>
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              <i class="fa fa-circle text-success"></i> Online
             </div>
           </div>
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-        
+            <li>
+              <a href="/admin">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
+              </a>
+            </li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-object-ungroup"></i> <span>Оголошення</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                <li><a href="../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                <li><a href="{{ route('admin_adverts') }}"><i class="fa fa-circle-o"></i>Список оголошень</a></li>
               </ul>
             </li>
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span>Layout Options</span>
-                <span class="label label-primary pull-right">4</span>
+              <a href="#"><i class="fa fa-file-photo-o"></i><span>Банера</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                <li><a href="layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                <li><a href="layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                <li><a href="layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-              </ul>
-            </li>
-            <li class="active">
-              <a href="widgets.html">
-                <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">new</small>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-pie-chart"></i>
-                <span>Charts</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                <li><a href="charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                <li><a href="charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                <li><a href="charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-              </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>UI Elements</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                <li><a href="UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-                <li><a href="UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                <li><a href="UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                <li><a href="UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                <li><a href="UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-              </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-edit"></i> <span>Forms</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                <li><a href="forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                <li><a href="forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-              </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-table"></i> <span>Tables</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                <li><a href="tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                <li><a href="{{ route('admin_baners') }}"><i class="fa fa-circle-o"></i>Список банерів</a></li>
+                <li><a href="{{ route('admin_baners_add') }}"><i class="fa fa-circle-o"></i>Додати банер</a></li>
               </ul>
             </li>
             <li>
-              <a href="calendar.html">
-                <i class="fa fa-calendar"></i> <span>Calendar</span>
-                <small class="label pull-right bg-red">3</small>
+              <a href="#" class="treeview">
+                <i class="fa fa-list"></i> <span>Категорії</span></i>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ route('admin_categories') }}"><i class="fa fa-circle-o"></i>Список категорій</a></li>
+                <li><a href="{{ route('admin_category_add') }}"><i class="fa fa-circle-o"></i>Додати категорію</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="{{ route('admin_messages') }}">
+                <i class="fa fa-commenting-o"></i> <span>Повідомлення</span></i>
               </a>
             </li>
             <li>
-              <a href="mailbox/mailbox.html">
-                <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                <small class="label pull-right bg-yellow">12</small>
+              <a href="{{ route('admin_users') }}">
+                <i class="fa fa-users"></i> <span>Користувачі</span></i>
               </a>
             </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-folder"></i> <span>Examples</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-                <li><a href="examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-                <li><a href="examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-                <li><a href="examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-                <li><a href="examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-                <li><a href="examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-                <li><a href="examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-                <li><a href="examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-              </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-share"></i> <span>Multilevel</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                    <li>
-                      <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
-                      <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-              </ul>
-            </li>
-            <li><a href="../documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-            <li class="header">LABELS</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -354,6 +175,20 @@
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
+        @if($error)
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @foreach($error as $item)
+              <p>{{$item}}</p>
+            @endforeach
+          </div>
+        @endif
+        @if($success)
+          <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p>{{$success}}</p>
+          </div>
+        @endif
           @yield('content')
       </div><!-- /.content-wrapper -->
 
@@ -525,17 +360,17 @@
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
     <!-- Slimscroll -->
-    <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
-    <script src="../plugins/fastclick/fastclick.min.js"></script>
+    <script src="/plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="../dist/js/app.min.js"></script>
+    <script src="/dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="../dist/js/demo.js"></script>
+    <script src="/dist/js/demo.js"></script>
 
     @yield('scripts')
 

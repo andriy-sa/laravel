@@ -881,6 +881,36 @@ table.sa-table-info tr td:nth-child(3){
 	color:#fff;
 	text-align: center;
 }
+body.error-404 #content {
+	text-align: center;
+}
+body.error-404 #content .error-page {
+	padding-top: 80px;
+}
+body.error-404 #error-modal {
+	padding-top: 40px;
+}
+body.error-404 #content .error-page #error-modal .error-log3 {
+	font-size: 60px;
+	color: #d2d2d2;
+	text-shadow: -1px -1px 1px #646464;
+	font-weight: 100;
+}
+body.error-404 #content .error-page #error-modal .error-log1 {
+	font-size: 24px;
+	color: #000;
+}
+
+body.error-404 #content .error-page a.reset {
+	background: #7179ac;
+	color: #fff;
+	border-radius: 3px;
+	padding: 10px 50px;
+	border: 0;
+	margin: 0 auto;
+	margin-top: 50px;
+	display: inline-block;
+}
 
 @media (max-width: 767px) {
 	.head-t .site-slogan {

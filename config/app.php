@@ -163,6 +163,7 @@ return [
         App\Providers\SiteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class
 
     ],
 
@@ -215,6 +216,7 @@ return [
         'Input'     => Illuminate\Support\Facades\Input::class,
         'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
         'Checker'   => App\Sa\CheckerFacade::class,
+        'Datatables' => Yajra\Datatables\Datatables::class
     ],
 
 ];

@@ -17,7 +17,7 @@ class CreateAdvertisementsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('category_id')->unsigned()->index();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('read')->default(0);
